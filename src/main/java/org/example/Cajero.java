@@ -8,7 +8,7 @@ public class Cajero {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void menu() {
-        int opcion;
+        int opcion = 0;
         do {
             mostrarOpciones();
             System.out.print("Ingrese una opción: ");
@@ -68,10 +68,44 @@ public class Cajero {
         }
     }
 
+    public static void retirar(int monto) throws IllegalArgumentException {
+        if (monto <= 0) {
+            throw new IllegalArgumentException("El monto a retirar debe ser positivo.");
+        }
+        if (monto % 1000 != 0) {
+            throw new IllegalArgumentException("El monto a retirar debe ser múltiplo de 1000.");
+        }
+        if (monto > saldo) {
+            throw new IllegalArgumentException("Saldo insuficiente.");
+        }
+        saldo -= monto;
+        System.out.println("Retiro exitoso de: " + monto);
+        System.out.println("Saldo actual: " + saldo);
+    }
+
+    public static void depositar(int monto) throws IllegalArgumentException {
+        if (monto <= 0) {
+            throw new IllegalArgumentException("El monto a depositar debe ser positivo.");
+        }
+        if (monto % 1000 != 0) {
+            throw new IllegalArgumentException("El monto a depositar debe ser múltiplo de 1000.");
+        }
+        saldo += monto;
+        System.out.println("Depósito exitoso de: " + monto);
+        System.out.println("Saldo actual: " + saldo);
+    }
+
+
+    /**
+     * Realiza un retiro de dinero si las condiciones son válidas.
+     * @throws IllegalArgumentException Si el monto no es positivo, no es múltiplo de 1000, o excede el saldo.
+     */
     public static int obtenerSaldo() {
         return saldo;
     }   //reinicia el saldo a un valor inicial fijo (usado en pruebas)
 
-    public static void reiniciarSaldo() {
-        saldo = 100000;
+    public static void main(String[] args) {
+        menu();
     }
+
+}
