@@ -67,3 +67,11 @@ public class Cajero {
                 System.out.println("Opción no válida. Por favor, intente de nuevo.");
         }
     }
+
+    public static int obtenerSaldo() {
+        return saldo;
+    }   //reinicia el saldo a un valor inicial fijo (usado en pruebas)
+
+    public static void reiniciarSaldo() {
+        saldo = 100000;
+    }
